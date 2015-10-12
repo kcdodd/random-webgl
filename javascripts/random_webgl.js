@@ -181,8 +181,9 @@ define(['utilities'], function (util){
                         "vec4 s = texture2D(u_entropy, x);",
 
                         "x = 0.999 * x + 0.001 * s.zw;",
+                        "vec2 m = s.xy + rand.xy;",
                         //
-                        "gl_FragColor = vec4(s.y, s.x, 4.0 * x * (1.0 - x));",
+                        "gl_FragColor = vec4((m.x > 1.0) ? m.x - 1.0 : m.x, (m.y > 1.0) ? m.y - 1.0 : m.y, 4.0 * x * (1.0 - x));",
 
 
                     "}"
@@ -225,7 +226,9 @@ define(['utilities'], function (util){
                         "vec4 s = texture2D(u_entropy, x);",
 
                         "x = 0.999 * x + 0.001 * s.zw;",
-                        "gl_FragColor = vec4(s.x, s.y, 4.0 * x * (1.0 - x));",
+                        "vec2 m = s.xy + rand.xy;",
+                        //
+                        "gl_FragColor = vec4((m.x > 1.0) ? m.x - 1.0 : m.x, (m.y > 1.0) ? m.y - 1.0 : m.y, 4.0 * x * (1.0 - x));",
 
 
                     "}"
